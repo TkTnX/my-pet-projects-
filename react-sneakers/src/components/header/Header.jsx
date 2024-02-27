@@ -1,0 +1,52 @@
+import React from "react";
+import "./_header.scss";
+
+import logo from "./img/logo.png";
+
+import cart from "./img/cart.svg";
+import heart from "./img/heart.svg";
+import profile from "./img/profile.svg";
+
+export const Header = () => {
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header__wrapper">
+          <div className="logo">
+            <img src={logo} alt="Logo" />
+            <div className="logo__text">
+              <h3 className="logo__title">REACT SNEAKERS</h3>
+              <p className="logo__desc">Магазин лучших кроссовок</p>
+            </div>
+          </div>
+          <nav className="header__nav">
+            <ul className="header__list">
+              <li className="header__item">
+                <a href="#!" className="header__link">
+                  <img src={cart} className="header__item-img" alt="cart" />
+                  <p className="header__item-text header__price">1205 руб.</p>
+                </a>
+              </li>
+              <li className="header__item">
+                <a href="#!" className="header__link">
+                  <img src={heart} className="header__item-img" alt="heart" />
+                  <p className="header__item-text">Закладки</p>
+                </a>
+              </li>
+              <li className="header__item">
+                <a href="#!" className="header__link">
+                  <img
+                    src={profile}
+                    className="header__item-img"
+                    alt="profile"
+                  />
+                  <p className="header__item-text">Профиль</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+};
