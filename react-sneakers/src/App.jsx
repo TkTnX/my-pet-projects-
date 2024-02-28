@@ -1,11 +1,11 @@
 import { Header } from "./components/header/Header";
-import { Home } from "./pages/home/Home";
+import { Sneakers } from "./pages/home/Sneakers";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Home />
+      <Sneakers />
     </div>
   );
 }

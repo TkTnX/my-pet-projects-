@@ -1,0 +1,35 @@
+.sneakers {
+  padding-top: 40px;
+}
+
+.sneakers__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sneakers__title {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.sneakers__form {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+  gap: 14px;
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+}
+
+.sneakers__input {
+  display: block;
+  padding: 13px 15px;
+}
+
+.sneakers__list {
+  padding-top: 40px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}

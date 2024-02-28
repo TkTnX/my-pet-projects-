@@ -1,38 +1,3 @@
-.sneakers {
-  padding-top: 40px;
-}
-
-.sneakers__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.sneakers__title {
-  font-weight: 700;
-  font-size: 32px;
-}
-
-.sneakers__form {
-  display: flex;
-  align-items: center;
-  padding-left: 18px;
-  gap: 14px;
-  border: 1px solid #f3f3f3;
-  border-radius: 10px;
-}
-
-.sneakers__input {
-  display: block;
-  padding: 13px 15px;
-}
-
-.sneakers__list {
-  padding-top: 40px;
-  display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-}
 .card {
   position: relative;
   border: 1px solid #f3f3f3;
@@ -59,13 +24,21 @@
   display: flex;
   align-items: center;
 
-  border: 1px solid #f2f2f2;
+  border: 1px solid #d1d1d1;
   border-radius: 7px;
   padding: 10px;
   transition: all 0.2s ease-in;
 
+  path {
+    stroke: #d1d1d1;
+    transition: all 0.2s ease-in;
+  }
+
   &:hover {
-    background-color: #f2f2f2;
+    background-color: #fef0f0;
+    path {
+      stroke: #ff8585;
+    }
   }
 }
 .card__title {
@@ -89,7 +62,7 @@
   font-weight: 700;
 }
 .card__add {
-  border: 1px solid #f2f2f2;
+  border: 1px solid #d1d1d1;
   border-radius: 8px;
   padding: 10px;
 
@@ -98,7 +71,34 @@
 
   transition: all 0.2s ease-in;
 
+  path {
+    transition: all 0.2s ease-in;
+  }
+
   &:hover {
-    background-color: #f2f2f2;
+    border-color: #7ce990;
+    path {
+      fill: #7ce990;
+    }
+  }
+}
+
+.card__heart--liked {
+  background-color: #fef0f0;
+  border-color: #ff8585;
+  svg {
+    fill: #ff8585;
+  }
+  path {
+    stroke: #ff8585;
+  }
+}
+
+.card__add--liked {
+  background: linear-gradient(180deg, #89f09c 0%, #3cc755 100%);
+  height: 34px;
+  border-color: #89f09c;
+  svg {
+    fill: #fff;
   }
 }

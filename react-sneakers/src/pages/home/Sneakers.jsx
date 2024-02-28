@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./_sneakers.scss";
 
-import img1 from "./img/01.jpg";
-import add from "./img/plus.svg";
-import heart from "./img/heart.svg";
 import searchImg from "./img/search.svg";
+import { Card } from "./components/Card/Card";
+import { Skeleton } from "./components/Card/Skeleton";
+// import { Cart } from "./components/cart/Cart";
 export const Sneakers = () => {
   const [card, setCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +25,7 @@ export const Sneakers = () => {
 
   return (
     <section className="sneakers">
+      {/* <Cart /> */}
       <div className="container">
         <div className="sneakers__top">
           <h2 className="sneakers__title">Все кроссовки</h2>
@@ -41,7 +42,7 @@ export const Sneakers = () => {
         </div>
         <ul className="sneakers__list">
           {isLoading ? (
-            <h2 className="loading">Loading...</h2>
+            <Skeleton />
           ) : (
             card
               .filter((value) => {
@@ -51,26 +52,7 @@ export const Sneakers = () => {
                 );
               })
               .map((value) => {
-                return (
-                  <li key={value.id} className="card">
-                    <button className="card__heart">
-                      <img src={heart} alt="add to favorite!" />
-                    </button>
-                    <div className="card__img">
-                      <img src={value.img} alt="img1" />
-                    </div>
-                    <h5 className="card__title">{value.title}</h5>
-                    <div className="card__bottom">
-                      <div className="card__price">
-                        <p className="card__price-title">ЦЕНА:</p>
-                        <p className="card__price-price">{value.price}</p>
-                      </div>
-                      <button className="card__add">
-                        <img src={add} alt="add to cart!" />
-                      </button>
-                    </div>
-                  </li>
-                );
+                return <Card key={value.id} {...value} />;
               })
           )}
         </ul>

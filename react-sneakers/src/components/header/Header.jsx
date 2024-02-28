@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./_header.scss";
 
 import logo from "./img/logo.png";
@@ -8,6 +8,7 @@ import heart from "./img/heart.svg";
 import profile from "./img/profile.svg";
 
 export const Header = () => {
+  const [openCart, setOpenCart] = useState(false);
   return (
     <header className="header">
       <div className="container">
@@ -22,10 +23,16 @@ export const Header = () => {
           <nav className="header__nav">
             <ul className="header__list">
               <li className="header__item">
-                <a href="#!" className="header__link">
+                <button
+                  onClick={() =>
+                    openCart ? setOpenCart(false) : setOpenCart(true)
+                  }
+                  type="button"
+                  className="header__link"
+                >
                   <img src={cart} className="header__item-img" alt="cart" />
                   <p className="header__item-text header__price">1205 руб.</p>
-                </a>
+                </button>
               </li>
               <li className="header__item">
                 <a href="#!" className="header__link">
