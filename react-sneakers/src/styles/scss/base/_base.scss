@@ -11,3 +11,16 @@ body {
 a {
   color: inherit;
 }
+
+.App-back {
+  position: absolute;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+.overflow {
+  overflow-y: hidden;
+}

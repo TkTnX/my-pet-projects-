@@ -7,8 +7,7 @@ import cart from "./img/cart.svg";
 import heart from "./img/heart.svg";
 import profile from "./img/profile.svg";
 
-export const Header = () => {
-  const [openCart, setOpenCart] = useState(false);
+export const Header = (props) => {
   return (
     <header className="header">
       <div className="container">
@@ -24,9 +23,7 @@ export const Header = () => {
             <ul className="header__list">
               <li className="header__item">
                 <button
-                  onClick={() =>
-                    openCart ? setOpenCart(false) : setOpenCart(true)
-                  }
+                  onClick={props.onClickCart}
                   type="button"
                   className="header__link"
                 >

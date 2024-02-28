@@ -4,7 +4,7 @@ import "./_sneakers.scss";
 import searchImg from "./img/search.svg";
 import { Card } from "./components/Card/Card";
 import { Skeleton } from "./components/Card/Skeleton";
-// import { Cart } from "./components/cart/Cart";
+
 export const Sneakers = () => {
   const [card, setCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +25,6 @@ export const Sneakers = () => {
 
   return (
     <section className="sneakers">
-      {/* <Cart /> */}
       <div className="container">
         <div className="sneakers__top">
           <h2 className="sneakers__title">Все кроссовки</h2>
