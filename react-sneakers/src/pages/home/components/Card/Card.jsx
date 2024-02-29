@@ -3,9 +3,14 @@ import "./_card.scss";
 
 import added from "./../../img/added.svg";
 
-export const Card = ({ img, title, price }) => {
+export const Card = ({ img, title, price, onPlus }) => {
   const [like, setLike] = useState(false);
   const [addToCart, setAddToCart] = useState(false);
+
+  const onClickPlus = () => {
+    onPlus({ img, title, price });
+    addToCart ? setAddToCart(false) : setAddToCart(true);
+  };
 
   return (
     <li className="card">
@@ -39,7 +44,7 @@ export const Card = ({ img, title, price }) => {
           <p className="card__price-price">{price}</p>
         </div>
         <button
-          onClick={() => (addToCart ? setAddToCart(false) : setAddToCart(true))}
+          onClick={onClickPlus}
           className={addToCart ? "card__add card__add--liked" : "card__add"}
         >
           {addToCart ? (

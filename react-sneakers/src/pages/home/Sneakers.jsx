@@ -5,7 +5,7 @@ import searchImg from "./img/search.svg";
 import { Card } from "./components/Card/Card";
 import { Skeleton } from "./components/Card/Skeleton";
 
-export const Sneakers = () => {
+export const Sneakers = ({ cartItems, setCartItems }) => {
   const [card, setCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -22,6 +22,10 @@ export const Sneakers = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
+
+  const onAddToCard = (obj) => {
+    setCartItems((prev) => [...prev, obj]);
+  };
 
   return (
     <section className="sneakers">
@@ -51,7 +55,13 @@ export const Sneakers = () => {
                 );
               })
               .map((value) => {
-                return <Card key={value.id} {...value} />;
+                return (
+                  <Card
+                    onPlus={() => onAddToCard(value)}
+                    key={value.id}
+                    {...value}
+                  />
+                );
               })
           )}
         </ul>

@@ -4,6 +4,7 @@ import { Sneakers } from "./pages/home/Sneakers";
 import { Cart } from "./pages/home/components/cart/Cart";
 function App() {
   const [openCart, setOpenCart] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   openCart
     ? (document.body.style.overflow = "hidden")
@@ -13,9 +14,15 @@ function App() {
     <div className="App">
       <div className={openCart ? "App-back" : ""}></div>
       <Header onClickCart={() => setOpenCart(true)} />
-      {openCart ? <Cart onClickClose={() => setOpenCart(false)} /> : null}
+      {openCart ? (
+        <Cart items={cartItems} onClickClose={() => setOpenCart(false)} />
+      ) : null}
 
-      <Sneakers openCart={openCart} />
+      <Sneakers
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        openCart={openCart}
+      />
     </div>
   );
 }
