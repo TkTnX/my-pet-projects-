@@ -27,6 +27,8 @@ export const Sneakers = ({ cartItems, setCartItems }) => {
     setCartItems((prev) => [...prev, obj]);
   };
 
+
+
   return (
     <section className="sneakers">
       <div className="container">

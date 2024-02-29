@@ -7,7 +7,7 @@ import cart from "./img/cart.svg";
 import heart from "./img/heart.svg";
 import profile from "./img/profile.svg";
 
-export const Header = (props) => {
+export const Header = ({ onClickCart }) => {
   return (
     <header className="header">
       <div className="container">
@@ -23,7 +23,7 @@ export const Header = (props) => {
             <ul className="header__list">
               <li className="header__item">
                 <button
-                  onClick={props.onClickCart}
+                  onClick={onClickCart}
                   type="button"
                   className="header__link"
                 >

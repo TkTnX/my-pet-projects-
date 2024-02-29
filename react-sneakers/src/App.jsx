@@ -6,6 +6,10 @@ function App() {
   const [openCart, setOpenCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
+  const onClickDelete = (id) => {
+    setCartItems((now) => now.filter((obj) => id !== obj.id));
+  };
+
   openCart
     ? (document.body.style.overflow = "hidden")
     : (document.body.style.overflow = "auto");
@@ -15,7 +19,11 @@ function App() {
       <div className={openCart ? "App-back" : ""}></div>
       <Header onClickCart={() => setOpenCart(true)} />
       {openCart ? (
-        <Cart items={cartItems} onClickClose={() => setOpenCart(false)} />
+        <Cart
+          onClickDelete={onClickDelete}
+          items={cartItems}
+          onClickClose={() => setOpenCart(false)}
+        />
       ) : null}
 
       <Sneakers

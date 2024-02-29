@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./_cart.scss";
 import plus from "./plus.svg";
 import emptyCart from "./empty-cart/box.png";
 import delImg from "./del.svg";
 
-export const Cart = ({ onClickClose, items = [] }) => {
+export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
   return (
     <div className="cart">
       <div className="cart__wrapper">
@@ -36,22 +36,24 @@ export const Cart = ({ onClickClose, items = [] }) => {
               </div>
             ) : (
               items.map(({ id, img, title, price }) => (
-                <>
-                  <li key={id} className="cart__product">
-                    <div className="card__img">
-                      <img width={70} src={img} alt={title} />
+                <li key={id} className="cart__product">
+                  <div className="card__img">
+                    <img width={70} src={img} alt={title} />
+                  </div>
+                  <div className="card__product-text">
+                    <h6 className="card__product-title">{title}</h6>
+                    <div className="card__product-bottom">
+                      <p className="card__product-price">{price}</p>
+
+                      <button
+                        onClick={() => onClickDelete(id)}
+                        className="card__product-delBtn"
+                      >
+                        <img src={delImg} alt="Delete" />
+                      </button>
                     </div>
-                    <div className="card__product-text">
-                      <h6 className="card__product-title">{title}</h6>
-                      <div className="card__product-bottom">
-                        <p className="card__product-price">{price}</p>
-                        <button className="card__product-delBtn">
-                          <img src={delImg} alt="Delete" />
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                </>
+                  </div>
+                </li>
               ))
             )}
           </ul>
