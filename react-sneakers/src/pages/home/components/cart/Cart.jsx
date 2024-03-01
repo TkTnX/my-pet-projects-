@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./_cart.scss";
+import { Order } from "./order/Order";
+import { Empty } from "./empty-cart/Empty";
+
 import plus from "./plus.svg";
-import emptyCart from "./empty-cart/box.png";
 import delImg from "./del.svg";
 
 export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
+  const [order, setOrder] = useState(false);
+
+  const orderFunc = () => setOrder(!order);
   return (
     <div className="cart">
       <div className="cart__wrapper">
@@ -15,25 +20,9 @@ export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
               <img src={plus} alt="close" />
             </button>
           </h3>
-          <ul className="cart__products">
+          <ul className={order ? "none" : "cart__products"}>
             {items.length === 0 ? (
-              <div className="cart__empty">
-                <div className="cart__empty-wrapper">
-                  <div className="cart__empty-img">
-                    <img src={emptyCart} alt="cart empty" />
-                  </div>
-                  <h4 className="cart__empty-title">Корзина пустая</h4>
-                  <p className="cart__empty-desc ">
-                    Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-                  </p>
-                  <button
-                    onClick={onClickClose}
-                    className="cart__empty-btn cart__btn"
-                  >
-                    Вернуться назад
-                  </button>
-                </div>
-              </div>
+              <Empty onClickClose={onClickClose} />
             ) : (
               items.map(({ id, img, title, price }) => (
                 <li key={id} className="cart__product">
@@ -59,7 +48,7 @@ export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
           </ul>
         </div>
         {items.length === 0 ? null : (
-          <div className="cart__bottom">
+          <div className={order ? "none" : "cart__bottom"}>
             <div className="cart__bottom-desc">
               <div className="cart__bottom-title">Итого:</div>
               <div className="cart__bottom-price">21 498 руб.</div>
@@ -68,9 +57,12 @@ export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
               <div className="cart__bottom-title">Налог 5%:</div>
               <div className="cart__bottom-price">1074 руб.</div>
             </div>
-            <button className="cart__btn">Оформить заказ</button>
+            <button onClick={() => orderFunc()} className="cart__btn">
+              Оформить заказ
+            </button>
           </div>
         )}
+        {order && <Order onClickClose={onClickClose} />}
       </div>
     </div>
   );

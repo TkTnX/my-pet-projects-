@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./_header.scss";
 
 import logo from "./img/logo.png";
@@ -12,13 +13,13 @@ export const Header = ({ onClickCart }) => {
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <div className="logo">
+          <NavLink to="/" className="logo">
             <img src={logo} alt="Logo" />
             <div className="logo__text">
               <h3 className="logo__title">REACT SNEAKERS</h3>
               <p className="logo__desc">Магазин лучших кроссовок</p>
             </div>
-          </div>
+          </NavLink>
           <nav className="header__nav">
             <ul className="header__list">
               <li className="header__item">
@@ -32,10 +33,10 @@ export const Header = ({ onClickCart }) => {
                 </button>
               </li>
               <li className="header__item">
-                <a href="#!" className="header__link">
+                <NavLink className="header__link" to="/favorite">
                   <img src={heart} className="header__item-img" alt="heart" />
                   <p className="header__item-text">Закладки</p>
-                </a>
+                </NavLink>
               </li>
               <li className="header__item">
                 <a href="#!" className="header__link">

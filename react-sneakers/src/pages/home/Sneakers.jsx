@@ -5,7 +5,7 @@ import searchImg from "./img/search.svg";
 import { Card } from "./components/Card/Card";
 import { Skeleton } from "./components/Card/Skeleton";
 
-export const Sneakers = ({ cartItems, setCartItems }) => {
+export const Sneakers = ({ setCartItems, setFavoriteItems }) => {
   const [card, setCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -26,6 +26,10 @@ export const Sneakers = ({ cartItems, setCartItems }) => {
   const onAddToCard = (obj) => {
     setCartItems((prev) => [...prev, obj]);
   };
+
+  const onAddToFav = (obj) => {
+    setFavoriteItems((prev) => [...prev, obj])
+  }
 
 
 
@@ -59,6 +63,7 @@ export const Sneakers = ({ cartItems, setCartItems }) => {
               .map((value) => {
                 return (
                   <Card
+                    onFav={() => onAddToFav(value)}
                     onPlus={() => onAddToCard(value)}
                     key={value.id}
                     {...value}

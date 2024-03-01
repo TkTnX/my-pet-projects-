@@ -3,7 +3,7 @@ import "./_card.scss";
 
 import added from "./../../img/added.svg";
 
-export const Card = ({ img, title, price, onPlus }) => {
+export const Card = ({ img, title, price, onPlus, onFav }) => {
   const [like, setLike] = useState(false);
   const [addToCart, setAddToCart] = useState(false);
 
@@ -12,10 +12,15 @@ export const Card = ({ img, title, price, onPlus }) => {
     addToCart ? setAddToCart(false) : setAddToCart(true);
   };
 
+  const onClickFav = () => {
+    onFav({ img, title, price });
+    like ? setLike(false) : setLike(true);
+  };
+
   return (
     <li className="card">
       <button
-        onClick={() => (like ? setLike(false) : setLike(true))}
+        onClick={onClickFav}
         className={like ? "card__heart card__heart--liked" : "card__heart "}
       >
         <svg
