@@ -24,7 +24,7 @@ export const Profile = ({ items = [] }) => {
                 <div className="card__bottom">
                   <div className="card__price">
                     <p className="card__price-title">ЦЕНА:</p>
-                    <p className="card__price-price">{price}</p>
+                    <p className="card__price-price">{price} руб.</p>
                   </div>
                 </div>
               </li>

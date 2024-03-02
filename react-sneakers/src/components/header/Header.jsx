@@ -14,7 +14,6 @@ export const Header = ({ onClickCart, cartItems }) => {
     0
   );
 
-  console.log(cartItems);
   return (
     <header className="header">
       <div className="container">

@@ -9,8 +9,8 @@ import { Profile } from "./pages/profile/Profile";
 function App() {
   const [openCart, setOpenCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [favoriteItems, setFavoriteItems] = useState([]);
 
+  const [favoriteItems, setFavoriteItems] = useState([]);
 
   const onClickDelete = (id) =>
     setCartItems((now) => now.filter((obj) => id !== obj.id));
@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-      <div className={openCart ? "App-back" : ""}></div>
       {openCart ? (
         <Cart
           onClickDelete={onClickDelete}
@@ -43,6 +42,8 @@ function App() {
                 setFavoriteItems={setFavoriteItems}
                 setCartItems={setCartItems}
                 openCart={openCart}
+                cartItems={cartItems}
+                favoriteItems={favoriteItems}
               />
             }
           />

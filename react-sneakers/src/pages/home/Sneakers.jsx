@@ -5,7 +5,12 @@ import searchImg from "./img/search.svg";
 import { Card } from "./components/Card/Card";
 import { Skeleton } from "./components/Card/Skeleton";
 
-export const Sneakers = ({ setCartItems, setFavoriteItems }) => {
+export const Sneakers = ({
+  setCartItems,
+  setFavoriteItems,
+  cartItems = [],
+  favoriteItems,
+}) => {
   const [card, setCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -24,14 +29,19 @@ export const Sneakers = ({ setCartItems, setFavoriteItems }) => {
   }, []);
 
   const onAddToCard = (obj) => {
-    setCartItems((prev) => [...prev, obj]);
+    const isItemInCart = cartItems.some((value) => value.id === obj.id);
+
+    isItemInCart
+      ? null
+      : setCartItems((prev) => [...prev, obj]);
   };
 
   const onAddToFav = (obj) => {
-    setFavoriteItems((prev) => [...prev, obj])
-  }
-
-
+    const isItemInCart = favoriteItems.some((value) => value.id === obj.id);
+    isItemInCart
+      ? null
+      : setFavoriteItems((prev) => [...prev, obj]);
+  };
 
   return (
     <section className="sneakers">

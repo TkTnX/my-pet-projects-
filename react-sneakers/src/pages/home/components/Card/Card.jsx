@@ -9,7 +9,7 @@ export const Card = ({ img, title, price, onPlus, onFav }) => {
 
   const onClickPlus = () => {
     onPlus({ img, title, price });
-    addToCart ? setAddToCart(false) : setAddToCart(true);
+    setAddToCart(!addToCart);
   };
 
   const onClickFav = () => {
@@ -46,7 +46,7 @@ export const Card = ({ img, title, price, onPlus, onFav }) => {
       <div className="card__bottom">
         <div className="card__price">
           <p className="card__price-title">ЦЕНА:</p>
-          <p className="card__price-price">{price}</p>
+          <p className="card__price-price">{price} руб.</p>
         </div>
         <button
           onClick={onClickPlus}

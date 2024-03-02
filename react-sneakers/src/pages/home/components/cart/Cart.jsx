@@ -12,58 +12,64 @@ export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
 
   const orderFunc = () => setOrder(!order);
   return (
-    <div className="cart">
-      <div className="cart__wrapper">
-        <div className="cart__top">
-          <h3 className="cart__title">
-            Корзина
-            <button onClick={onClickClose} className="cart__close">
-              <img src={plus} alt="close" />
-            </button>
-          </h3>
-          <ul className={order ? "none" : "cart__products"}>
-            {items.length === 0 ? (
-              <Empty onClickClose={onClickClose} />
-            ) : (
-              items.map(({ id, img, title, price }) => (
-                <li key={id} className="cart__product">
-                  <div className="card__img">
-                    <img width={70} src={img} alt={title} />
-                  </div>
-                  <div className="card__product-text">
-                    <h6 className="card__product-title">{title}</h6>
-                    <div className="card__product-bottom">
-                      <p className="card__product-price">{price}</p>
-
-                      <button
-                        onClick={() => onClickDelete(id)}
-                        className="card__product-delBtn"
-                      >
-                        <img src={delImg} alt="Delete" />
-                      </button>
+    <div className="overlay">
+      <div className="cart">
+        <div className="cart__wrapper">
+          <div className="cart__top">
+            <h3 className="cart__title">
+              Корзина
+              <button onClick={onClickClose} className="cart__close">
+                <img src={plus} alt="close" />
+              </button>
+            </h3>
+            <ul className={order ? "none" : "cart__products"}>
+              {items.length === 0 ? (
+                <Empty onClickClose={onClickClose} />
+              ) : (
+                items.map(({ id, img, title, price }) => (
+                  <li key={id} className="cart__product">
+                    <div className="card__img">
+                      <img width={70} src={img} alt={title} />
                     </div>
-                  </div>
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
-        {items.length === 0 ? null : (
-          <div className={order ? "none" : "cart__bottom"}>
-            <div className="cart__bottom-desc">
-              <div className="cart__bottom-title">Итого:</div>
-              <div className="cart__bottom-price">{totalPrice} руб.</div>
-            </div>
-            <div className="cart__bottom-desc">
-              <div className="cart__bottom-title">Налог 5%:</div>
-              <div className="cart__bottom-price">{totalPrice * 0.05} руб</div>
-            </div>
-            <button onClick={() => orderFunc()} className="cart__btn">
-              Оформить заказ
-            </button>
+                    <div className="card__product-text">
+                      <h6 className="card__product-title">{title}</h6>
+                      <div className="card__product-bottom">
+                        <p className="card__product-price">{price} руб.</p>
+
+                        <button
+                          onClick={() => onClickDelete(id)}
+                          className="card__product-delBtn"
+                        >
+                          <img src={delImg} alt="Delete" />
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                ))
+              )}
+            </ul>
           </div>
-        )}
-        {order && <Order onClickClose={onClickClose} />}
+          {items.length === 0 ? null : (
+            <div className={order ? "none" : "cart__bottom"}>
+              <div className="cart__bottom-desc">
+                <div className="cart__bottom-title">Итого:</div>
+                <div className="dotted-line"></div>
+                <b className="cart__bottom-price">{totalPrice} руб.</b>
+              </div>
+              <div className="cart__bottom-desc">
+                <div className="cart__bottom-title">Налог 5%:</div>
+                <div className="dotted-line"></div>
+                <b className="cart__bottom-price">
+                  {(totalPrice * 0.05).toFixed(1)} руб
+                </b>
+              </div>
+              <button onClick={() => orderFunc()} className="cart__btn">
+                Оформить заказ
+              </button>
+            </div>
+          )}
+          {order && <Order onClickClose={onClickClose} />}
+        </div>
       </div>
     </div>
   );
