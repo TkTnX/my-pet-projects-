@@ -8,7 +8,13 @@ import cart from "./img/cart.svg";
 import heart from "./img/heart.svg";
 import profile from "./img/profile.svg";
 
-export const Header = ({ onClickCart }) => {
+export const Header = ({ onClickCart, cartItems }) => {
+  const totalPrice = cartItems.reduce(
+    (sum, obj) => parseInt(obj.price) + sum,
+    0
+  );
+
+  console.log(cartItems);
   return (
     <header className="header">
       <div className="container">
@@ -29,7 +35,9 @@ export const Header = ({ onClickCart }) => {
                   className="header__link"
                 >
                   <img src={cart} className="header__item-img" alt="cart" />
-                  <p className="header__item-text header__price">1205 руб.</p>
+                  <p className="header__item-text header__price">
+                    {totalPrice} руб.
+                  </p>
                 </button>
               </li>
               <li className="header__item">
@@ -39,14 +47,14 @@ export const Header = ({ onClickCart }) => {
                 </NavLink>
               </li>
               <li className="header__item">
-                <a href="#!" className="header__link">
+                <NavLink to="/profile" className="header__link">
                   <img
                     src={profile}
                     className="header__item-img"
                     alt="profile"
                   />
                   <p className="header__item-text">Профиль</p>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </nav>

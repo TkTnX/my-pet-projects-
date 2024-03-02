@@ -8,6 +8,7 @@ import delImg from "./del.svg";
 
 export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
   const [order, setOrder] = useState(false);
+  const totalPrice = items.reduce((sum, obj) => parseInt(obj.price) + sum, 0);
 
   const orderFunc = () => setOrder(!order);
   return (
@@ -51,11 +52,11 @@ export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
           <div className={order ? "none" : "cart__bottom"}>
             <div className="cart__bottom-desc">
               <div className="cart__bottom-title">Итого:</div>
-              <div className="cart__bottom-price">21 498 руб.</div>
+              <div className="cart__bottom-price">{totalPrice} руб.</div>
             </div>
             <div className="cart__bottom-desc">
               <div className="cart__bottom-title">Налог 5%:</div>
-              <div className="cart__bottom-price">1074 руб.</div>
+              <div className="cart__bottom-price">{totalPrice * 0.05} руб</div>
             </div>
             <button onClick={() => orderFunc()} className="cart__btn">
               Оформить заказ
