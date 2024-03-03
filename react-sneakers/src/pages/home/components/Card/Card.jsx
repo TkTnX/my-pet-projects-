@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./_card.scss";
+import AppContext from "../../../../context";
 
 import added from "./../../img/added.svg";
 
-export const Card = ({ img, title, price, onPlus, onFav }) => {
+export const Card = ({ id, img, title, price, onPlus, onFav }) => {
+  const { isItemAdded } = useContext(AppContext);
   const [like, setLike] = useState(false);
-  const [addToCart, setAddToCart] = useState(false);
+
+
 
   const onClickPlus = () => {
     onPlus({ img, title, price });
-    setAddToCart(!addToCart);
   };
 
   const onClickFav = () => {
     onFav({ img, title, price });
-    like ? setLike(false) : setLike(true);
+    setLike(!like);
   };
 
   return (
@@ -40,7 +42,7 @@ export const Card = ({ img, title, price, onPlus, onFav }) => {
         </svg>
       </button>
       <div className="card__img">
-        <img src={img} alt="img1" />
+        <img src={img} alt={title} />
       </div>
       <h5 className="card__title">{title}</h5>
       <div className="card__bottom">
@@ -50,9 +52,11 @@ export const Card = ({ img, title, price, onPlus, onFav }) => {
         </div>
         <button
           onClick={onClickPlus}
-          className={addToCart ? "card__add card__add--liked" : "card__add"}
+          className={
+            isItemAdded(id) ? "card__add card__add--liked" : "card__add"
+          }
         >
-          {addToCart ? (
+          {isItemAdded(id) ? (
             <img src={added} />
           ) : (
             <svg

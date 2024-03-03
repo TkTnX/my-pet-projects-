@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import AppContext from "../../context";
+
 import "./_favorite.scss";
 import leftArrow from "./img/leftArrow.svg";
 import { Empty } from "./Empty/Empty";
 
-export const Favorite = ({ favoriteItems = [], onClickDelFav }) => {
+export const Favorite = ({ onClickDelFav }) => {
+  const { favoriteItems } = useContext(AppContext);
+
   return (
     <section className="favorite">
       <div className="container">

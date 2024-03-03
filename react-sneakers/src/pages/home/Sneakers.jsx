@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./_sneakers.scss";
 
@@ -11,32 +11,20 @@ export const Sneakers = ({
   setFavoriteItems,
   cartItems = [],
   favoriteItems,
+  isLoading,
+  card,
 }) => {
-  const [card, setCard] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("https://65d89a38c96fbb24c1bbe549.mockapi.io/cards")
-      .then((res) => {
-        setCard(res.data);
-      })
-      .finally(() => setIsLoading(false));
-
-    // axios
-    //   .get("https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack")
-    //   .then((res) => {
-    //     setCard(res.data);
-    //   })
-    //   .finally(() => setIsLoading(false));
-  }, []);
-
   const onAddToCard = (obj) => {
-    const isItemInCart = cartItems.some((value) => value.id === obj.id);
-
-    if (isItemInCart) {
-      return null;
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      axios.delete(
+        `https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack/${obj.id}`
+      );
+      setCartItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(obj.id))
+      );
     } else {
       axios.post("https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack", obj);
       setCartItems((prev) => [...prev, obj]);
@@ -45,7 +33,13 @@ export const Sneakers = ({
 
   const onAddToFav = (obj) => {
     const isItemInCart = favoriteItems.some((value) => value.id === obj.id);
-    isItemInCart ? null : setFavoriteItems((prev) => [...prev, obj]);
+
+    if (isItemInCart) {
+      return null;
+    } else {
+      axios.post("https://65e441cf3070132b3b24702e.mockapi.io/favorites", obj);
+      setFavoriteItems((prev) => [...prev, obj]);
+    }
   };
 
   return (
@@ -70,10 +64,7 @@ export const Sneakers = ({
           ) : (
             card
               .filter((value) => {
-                return (
-                  value.title.toLowerCase().includes(search.toLowerCase()) ||
-                  value.price.toLowerCase().includes(search.toLowerCase())
-                );
+                return value.title.toLowerCase().includes(search.toLowerCase());
               })
               .map((value) => {
                 return (
@@ -81,6 +72,7 @@ export const Sneakers = ({
                     onFav={() => onAddToFav(value)}
                     onPlus={() => onAddToCard(value)}
                     key={value.id}
+                    
                     {...value}
                   />
                 );
