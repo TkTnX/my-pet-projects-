@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import axios from "axios";
 import { Header } from "./components/header/Header";
 import { Sneakers } from "./pages/home/Sneakers";
 import { Cart } from "./pages/home/components/cart/Cart";
@@ -12,8 +12,18 @@ function App() {
 
   const [favoriteItems, setFavoriteItems] = useState([]);
 
-  const onClickDelete = (id) =>
+  useEffect(() => {
+    axios
+      .get("https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack")
+      .then((res) => {
+        setCartItems(res.data);
+      });
+  }, []);
+
+  const onClickDelete = (id) => {
+    axios.delete(`https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack/${id}`);
     setCartItems((now) => now.filter((obj) => id !== obj.id));
+  };
 
   const onClickDelFav = (id) =>
     setFavoriteItems((now) => now.filter((obj) => id !== obj.id));

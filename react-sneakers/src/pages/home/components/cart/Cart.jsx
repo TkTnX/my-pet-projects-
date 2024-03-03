@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./_cart.scss";
 import { Order } from "./order/Order";
 import { Empty } from "./empty-cart/Empty";
@@ -9,6 +10,8 @@ import delImg from "./del.svg";
 export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
   const [order, setOrder] = useState(false);
   const totalPrice = items.reduce((sum, obj) => parseInt(obj.price) + sum, 0);
+
+
 
   const orderFunc = () => setOrder(!order);
   return (
