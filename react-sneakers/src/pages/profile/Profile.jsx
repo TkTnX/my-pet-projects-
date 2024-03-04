@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./_profile.scss";
 import leftArrow from "./leftArrow.svg";
 
 export const Profile = ({ items = [] }) => {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        "https://65e441cf3070132b3b24702e.mockapi.io/orders"
+      );
+      console.log(data);
+    })();
+  }, []);
   return (
     <section className="favorite profile">
       <div className="container">

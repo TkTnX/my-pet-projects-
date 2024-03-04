@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+
 import "./_cart.scss";
+import { useCart } from "./../../../../hooks/useCart";
 import { Order } from "./order/Order";
 import { Empty } from "./empty-cart/Empty";
 
@@ -9,9 +10,7 @@ import delImg from "./del.svg";
 
 export const Cart = ({ onClickClose, items = [], onClickDelete }) => {
   const [order, setOrder] = useState(false);
-  const totalPrice = items.reduce((sum, obj) => parseInt(obj.price) + sum, 0);
-
-
+  const { totalPrice } = useCart();
 
   const orderFunc = () => setOrder(!order);
   return (

@@ -14,7 +14,6 @@ export const Sneakers = ({
   isLoading,
   card,
 }) => {
-  
   const [search, setSearch] = useState("");
 
   const onAddToCard = (obj) => {
@@ -72,7 +71,6 @@ export const Sneakers = ({
                     onFav={() => onAddToFav(value)}
                     onPlus={() => onAddToCard(value)}
                     key={value.id}
-                    
                     {...value}
                   />
                 );

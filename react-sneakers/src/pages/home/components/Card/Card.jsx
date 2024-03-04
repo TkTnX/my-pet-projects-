@@ -8,14 +8,14 @@ export const Card = ({ id, img, title, price, onPlus, onFav }) => {
   const { isItemAdded } = useContext(AppContext);
   const [like, setLike] = useState(false);
 
-
+  const object = { id, parentId: id, img, title, price };
 
   const onClickPlus = () => {
-    onPlus({ img, title, price });
+    onPlus(object);
   };
 
   const onClickFav = () => {
-    onFav({ img, title, price });
+    onFav(object);
     setLike(!like);
   };
 

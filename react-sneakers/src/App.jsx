@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { Header } from "./components/header/Header";
@@ -17,20 +17,24 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const cartResp = await axios.get(
-        "https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack"
-      );
+      try {
+        const cartResp = await axios.get(
+          "https://65d89a38c96fbb24c1bbe549.mockapi.io/cartBack"
+        );
 
-      const favResp = await axios.get(
-        "https://65e441cf3070132b3b24702e.mockapi.io/favorites"
-      );
-      const itemsResp = await axios
-        .get("https://65d89a38c96fbb24c1bbe549.mockapi.io/cards")
-        .finally(() => setIsLoading(false));
+        const favResp = await axios.get(
+          "https://65e441cf3070132b3b24702e.mockapi.io/favorites"
+        );
+        const itemsResp = await axios
+          .get("https://65d89a38c96fbb24c1bbe549.mockapi.io/cards")
+          .finally(() => setIsLoading(false));
 
-      setCartItems(cartResp.data);
-      setFavoriteItems(favResp.data);
-      setCard(itemsResp.data);
+        setCartItems(cartResp.data);
+        setFavoriteItems(favResp.data);
+        setCard(itemsResp.data);
+      } catch (error) {
+        alert("ошибка при запросе данных");
+      }
     }
     fetchData();
   }, []);
@@ -50,7 +54,7 @@ function App() {
     : (document.body.style.overflow = "auto");
 
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
